@@ -1,0 +1,81 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Air Quality API",
+      "version": "1.0.0",
+      "description": "API for checking air quality based on GPS coordinates"
+    },
+    "paths": {
+      "/api/air-quality": {
+        "get": {
+          "summary": "Get air quality for coordinates",
+          "parameters": [
+            {
+              "name": "latitude",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AirQuality"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "AirQuality": {
+          "type": "object",
+          "properties": {
+            "Result": {
+              "type": "object",
+              "properties": {
+                "Pollution": {
+                  "type": "object",
+                  "properties": {
+                    "ts": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "aqius": {
+                      "type": "integer"
+                    },
+                    "mainus": {
+                      "type": "string"
+                    },
+                    "aqicn": {
+                      "type": "integer"
+                    },
+                    "maincn": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
