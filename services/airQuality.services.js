@@ -11,8 +11,8 @@ class AirQualityService {
     async getAirQuality({lat , long}){
         const airQualityData = await this.getIQairService({lat , long})
         return {
-           Result: {
-             Pollution: airQualityData.data.current.pollution
+           data: {
+             Pollution: airQualityData?.data?.current?.pollution
            }
        };
     }
@@ -20,7 +20,7 @@ class AirQualityService {
     async mostPolluted () {
         const mostPolluted = await AirQualityModel.findOne().sort({ 'pollution.aqius': -1 });
         return {
-            Result: {
+            data: {
                 DateOfMostPolluted: mostPolluted.pollution.ts,
                 mostPolluted: mostPolluted.pollution.aqius
           }
@@ -39,7 +39,7 @@ class AirQualityService {
             },
         })
 
-        return response.data
+        return response?.data
     }
 }
 
